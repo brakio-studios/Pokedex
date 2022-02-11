@@ -10,6 +10,7 @@
 
 <script>
 	export let pokemon;
+	console.log(pokemon);
 	const type = pokemon.types[0].type.name;
 </script>
 
