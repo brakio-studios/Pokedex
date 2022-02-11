@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 
 export const pokemon = writable([]);
+export const team = writable([]);
+
 const pokemonDetails = {};
 let loaded = false;
 
@@ -37,4 +39,14 @@ export const getPokemonById = async (id) => {
 		console.log(error);
 		return null;
 	}
+};
+
+export const addPokemonToTeam = (id) => {
+	team.update((oldTeam) => {
+		const isIncluded = oldTeam.includes(id);
+		if (!isIncluded && oldTeam.length <= 5) {
+			return [...oldTeam, id];
+		}
+		return oldTeam;
+	});
 };

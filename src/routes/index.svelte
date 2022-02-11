@@ -1,6 +1,6 @@
 <script>
 	import PokemonCard from '../components/PokemonCard.svelte';
-	import { pokemon, fetchPokemon } from '../store/pokestore';
+	import { pokemon, fetchPokemon, team, addPokemonToTeam } from '../store/pokestore';
 
 	let searchTerm = '';
 	let filteredPokemon = [];
@@ -15,6 +15,10 @@
 			filteredPokemon = [...$pokemon];
 		}
 	}
+
+	const onFavorite = (id) => {
+		addPokemonToTeam(id);
+	};
 
 	fetchPokemon();
 </script>
@@ -32,7 +36,7 @@
 	/>
 	<div class="py-4 grid gap-4 md:grid-cols-3 grid-cols-1">
 		{#each filteredPokemon as poke}
-			<PokemonCard pokemon={poke} />
+			<PokemonCard pokemon={poke} onClick={onFavorite} />
 		{/each}
 	</div>
 </div>
